@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{layout.html}">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="sidebar"><div th:replace="sidebar :: sidebar-comment"></div></div>
+<div class="main">
+        <nav class="navbar navbar-expand-sm bg-light  justify-content-between">
+            <ul class="navbar-nav">
+          
+          
+            </ul>
+          </nav>
+     
+    
+
+
+          <div class="container-fluid">
+      <table class="table table-striped table-bordered ">
+          <thead class="thead-dark">
+        <tr>
+        <th th:text="月份"/>
+        <th th:text="姓名"/>
+        <th th:text="单元"/>
+        <th th:text="考核得分"/>
+        <th th:text="中心排名"/>
+        <th th:text="单元排名"/>
+        <th th:text="等级"/>
+        <th th:text="奖励金额"/>
+        <th th:text="奖励事项"/>
+ 
+    </tr>
+    <tbody>
+  <th:block th:each="index : ${index}">
+    <tr>
+        <td th:text="${index.month}"/>
+         <td th:text="${index.name}"/>
+          <td th:text="${index.unit}"/>
+           <td th:text="${index.point}"/>
+            <td th:text="${index.rankInCenter}"/>
+             <td th:text="${index.rankInUnit}"/>
+              <td th:text="${index.grade}"/>
+               <td th:text="${index.rewardValue}"/>
+                <td th:text="${index.rewardMatter}"/>
+       
+       
+        
+    </tr>
+   
+  </th:block>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

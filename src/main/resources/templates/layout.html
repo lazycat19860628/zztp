@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Layout</title>
+    <meta charset="utf-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+		<script th:src="@{/jquery.min.js}"></script>
+		<script th:src="@{/umd/popper.min.js}"></script>
+		<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+   
+   <style>
+.all{width:100%;margin-left:auto;margin-right:auto;}
+.nr{clear:both;}
+.main{display:inline;width:85%;float:right;}
+.sidebar{height:100%;display:inline;width:15%;float:left}
+.footer{clear:both;bottom;width:100%;}
+</style>
+</head>
+<body class="container-fluid">
+<div class="all"> 
+    <nav class="navbar navbar-expand-sm bg-light  justify-content-between">
+        <span class="navbar-text">
+            <span sec:authentication="name"></span>
+          </span>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+              <a  class="nav-link" th:href="@{/logout}">注销  </a> 
+          </li>
+        </ul>
+      </nav>
+    
+      
+    <div class="jumbotron jumbotron-fluid m-0 " style="background:#000">
+        <div class="container  background:#F00">
+            <h1>2019年领导人员廉洁自律民主测评</h1> 
+          </div>
+      </div>
+
+      <nav class="navbar navbar-expand-sm bg-light justify-content-end">
+          <ul class="navbar-nav">
+          
+         
+            <li class="nav-item">
+              <a   class="nav-link" th:href="@{/comment/commentTarget/index}">考试清单</a>
+            </li>
+             <li class="nav-item">
+              <a   class="nav-link" th:href="@{/comment/result/index}">jieguo</a>
+            </li>
+          
+          
+       
+          </ul>
+        </nav> 
+<div class="nr">
+<div>
+   <div>
+    <div layout:fragment="content"></div>
+ 
+</div>
+
+</div>
+
+<div class="footer" style="background:#000" >
+    <span sec:authentication="name"></span>
+		 
+		
+
+</div>
+</div>
+</div>  
+</body>
+</html>

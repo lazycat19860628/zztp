@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout：decorate="~{layout.html}">
+
+
+<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			.all{width:100%;margin-left:auto;margin-right:auto;}
+			.main{ text-align:center}
+			
+			</style>
+		
+<title>登录页面</title>
+
+<style>
+
+	.all{width:100%;margin-left:auto;margin-right:auto;}
+	.nr{clear:both;}
+	.main{margin: 0 auto; text-align: center}
+	</style>
+</head>
+<body>
+	<div class="all">
+		<div class="main">
+ 
+		<h1>2019年领导人员廉洁自律民主测评</h1> 
+			<form name="form" th:action="@{/login}" action="/login" method="POST"> <!-- 3 -->
+				<div class="form-group">
+					<label for="username">账号</label>
+					<input type="text" class="form-control" name="username" value="" placeholder="账号" />
+				</div>
+				<div class="form-group">
+					<label for="password">密码</label>
+					<input type="password" class="form-control" name="password" placeholder="密码" />
+				</div>
+				<input type="submit" id="login" value="登录" class="btn btn-primary" />
+			</form>
+  
+
+		</div>	
+	</div>	
+</body>
+</html>

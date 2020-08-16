@@ -1,0 +1,91 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{layout.html}">
+
+<head>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script  th:src="@{/jquery.min.js}"></script>
+<script  th:src="@{/xlsx.min.js}"></script>
+<script th:inline="javascript" type="text/javascript">
+  /*<![CDATA[*/    //标识包裹的程序块为javascript
+	  $(document).ready(function(){ 
+	  var array = new Array();
+	  var arrayresult = new Array();
+	  var name = $('input[name$="realPoint"]').val();
+	  alert($('input[name$="realPoint"]').val());
+	  $('input[name$="realPoint"]').bind("change",function(){
+		  arrayresult=[]
+		  alert($(this).val());
+		  array.push($(this).val());
+		  for(i=0;i<array.length;i++){
+		  	arrayresult.push((array[i]-Math.min.apply(null, array))/(Math.max.apply(null, array)-Math.min.apply(null, array))*40+60);
+		  }
+		  for(i=0;i<arrayresult.length;i++){
+			  	
+			  }
+		  
+		  alert(Math.max.apply(null, arrayresult));
+		  var realPoint = $('#canvas')
+	      var cas=$('#canvas')[0].getContext('2d');
+		  cas.fillRect(10,100-arrayresult.length*10,50,100);   
+	  })  
+    });
+
+/*]]>*/
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="sidebar"><div th:replace="sidebar :: sidebar-comment"></div></div>
+<div class="main">
+		<div class="jumbotron">
+				<h2 class="text-center">编辑考评</h2>
+			<form name="userform" th:action="@{/comment/topic/save}"  method="POST" th:object="${edit}"> <!-- 3 -->
+			<div class="form-group">
+					<input type="hidden" class="form-control" th:field="*{id}" value="0"  />
+				</div>
+			
+				<div class="form-group">
+					<label for="name">名称</label>
+					<input type="text" class="form-control" name="name" th:field="*{name}" />
+				</div>
+					
+					
+				<table class="table table-striped table-bordered ">
+          <thead class="thead-dark">
+        <tr>
+        <th th:text="考评对象"/>
+        <th th:text="原始分数"/>
+        <th th:text="正则化后分数"/>
+    </tr>
+    <tbody>
+  <th:block th:each="commentTarget,i : *{commentTargets}">
+    <tr>
+        <td th:text="${commentTarget.id}"><input type="hidden"  th:field="*{commentTargets[__${i.index}__].id}" /></td>
+        <td><input type="text" class="form-control"  th:field="*{commentTargets[__${i.index}__].realPoint}" /></td>
+        <td><input type="text" class="form-control"  th:field="*{commentTargets[__${i.index}__].point}" />
+        <input type="hidden"  th:field="*{commentTargets[__${i.index}__].id}" /></td>
+    </tr>
+   
+  </th:block>
+</tbody>
+	</table>
+				
+			
+			
+				<input type="submit" id="save" value="save" class="btn btn-primary" />
+			</form>
+			<canvas id="canvas" width="200" height="100" style="border:10px solid #c3c3c3;">
+
+</canvas>
+
+
+      </div>
+      
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{layout.html}">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class=" row" layout:fragment="content">
+<div class=" col-md-2"><div th:replace="sidebar :: sidebar-sys"></div></div>
+<div class="col-md-10">
+
+		<div class="jumbotron">
+				<h2 class="text-center">新建用户</h2>
+				<div class="starter-template">
+						<a th:text="${exist}"></a>
+			<form name="userform" th:action="@{/sys/user/save}" action="/sys/user/save" method="POST"> <!-- 3 -->
+				<div class="form-group">
+					<input type="hidden" class="form-control" name="action" value="create" placeholder="create" />
+				</div>
+				<div class="form-group">
+					<label for="username">账号</label>
+					<input type="text" class="form-control" name="username" value="" placeholder="账号" />
+				</div>
+				<div class="form-group">
+					<label for="password">密码</label>
+					<input type="password" class="form-control" name="password" placeholder="密码" />
+				</div>
+			 	<div class="form-group">
+					<label for="roles">权限</label>
+					<ul th:each="create : ${create}" class="nav navbar-nav">
+		 	    		<li><label th:text="${create.name}"></label>
+							<input type="checkbox"  name="roles" th:value="${create.name}"  />
+						</li>
+					</ul>
+				</div>
+				
+				<input type="submit" id="adduser" value="adduser" class="btn btn-primary" />
+			</form>
+      </div>
+        </div>
+          </div>
+</div>
+
+</body>
+</html>

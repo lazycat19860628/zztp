@@ -1,0 +1,67 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{layout.html}">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class=" row" layout:fragment="content">
+<div class=" col-md-2"><div th:replace="sidebar :: sidebar-sys"></div></div>
+<div class="col-md-10">
+
+    <nav class="navbar navbar-expand-sm bg-light  justify-content-between">
+        <ul class="navbar-nav">
+         
+          <li class="nav-item">
+              <form class="form-inline" method="post" enctype="multipart/form-data" th:action="@{/sys/user/search}" > 
+                <div class="form-group">
+                    <label for="tag">工号</label>
+                    <input type="text" class="form-control" name="tag" value="" placeholder="标签" />
+                  </div> 
+                  <button type="submit" class="btn btn-primary">查询</button>
+                      
+                   </form>
+          </li>
+          <li class="nav-item">
+              <a type="button" class="btn btn-primary" th:href="@{/sys/user/create}">新建</a>
+          </li>
+        </ul>
+      </nav>
+ 
+
+
+
+      <div class="container-fluid">
+  <table class="table table-striped table-bordered ">
+      <thead class="thead-dark">
+    <tr>
+    <th th:text="工号"/>
+    <th th:text="操作"/>
+    
+
+   
+    
+</tr>
+<tbody>
+<th:block th:each="search : ${search}">
+<tr>
+    <td th:text="${search.username}"/>
+   
+    <td><a th:href="@{/sys/user/edit(id=${search.id})}"> 修改</a></td>
+   
+
+   
+    
+</tr>
+
+</th:block>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

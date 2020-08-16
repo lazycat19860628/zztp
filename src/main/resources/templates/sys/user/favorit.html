@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{layout.html}">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div class=" row" layout:fragment="content">
+<div class=" col-md-2"><div th:replace="sidebar :: sidebar-sys"></div></div>
+<div class="col-md-10">
+            <nav class="navbar navbar-expand-sm bg-light  justify-content-between">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <form class="form-inline" method="post" enctype="multipart/form-data" th:action="@{/file/search/search}" > 
+                      <label for="tag"> 标签：</label>
+                      <input type="text" class="form-control" name="tag"  placeholder="标签" />
+                      <label for="filetext"> 关键字：</label>
+                      <input type="text" class="form-control" name="filetext" placeholder="关键字" />
+                      <label for="title"> 标题：</label>
+                      <input type="text" class="form-control" name="title" placeholder="标题" />
+                      <button type="submit" class="btn btn-primary">查询</button>
+                   </form>
+                  </li>
+                
+                </ul>
+              </nav>
+        <div class="container-fluid">
+             <table class="table table-bordered ">
+                  <thead class="thead-dark">
+                <tr>
+                 
+                <th th:text="序号"/>
+        <th th:text="风险专业"/>
+        <th th:text="文档名称"/>
+        <th th:text="文件编号"/>
+        <th th:text="状态"/>
+        <th th:text="下载次数"/>
+     <th th:text="操作"/>
+        </tr>
+        </thead>
+        <tbody>
+          <th:block th:each="favorit : ${favorit}">
+            <tr>
+            
+                   <td th:text="${favorit.id}"/>
+               <td th:text="${favorit.speciality}"/>
+       <td th:text="${favorit.title}"/>
+       <td th:text="${favorit.docno}"/>
+       <td th:text="${favorit.status}"/>
+       <td th:text="${favorit.downLoadCount}"/>
+           
+                   <td><a type="button" class="btn btn-primary" th:href="@{/file/filemanage/download(id=${favorit.id},filepath=${favorit.filepath},title=${favorit.title})}"> 下载</a>
+                  <a id="${favorit.id}" type="button" 
+                  class="btn btn-primary favorite"
+                  th:href="@{/file/filemanage/deleteFromCollection(id=${favorit.id})}" >
+                   <span th:text = "取消收藏"></span> </a>
+                   </td>
+                
+            </tr>
+           
+          </th:block>
+        </tbody>
+        </table>
+        
+        </div>
+        </div>
+        </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{layout.html}">
+
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class=" row" layout:fragment="content">
+<div class=" col-md-2"><div th:replace="sidebar :: sidebar-sys"></div></div>
+<div class="col-md-10">
+	<form name="gmm"  th:action="@{/sys/user/gmm}" action="gmm" method="post"> <!-- 3 -->
+		
+				<div class="form-group">
+					<label for="oldpw">原密码</label>
+					<input type="password" class="form-control" name="oldpw" value="" placeholder="原密码" /> <a th:text="${session.messages}"></a>
+				</div><a th:text="${pwe}"/></a>
+				<div class="form-group">
+					<label for="newpw">新密码</label>
+					<input type="password" class="form-control" name="newpw" value="" placeholder="新密码" />
+				</div>
+				<div class="form-group">
+					<label for="renewpw">重复新密码</label>
+					<input type="password" class="form-control" name="renewpw" value="" placeholder="新密码" />
+				</div><a th:text="${repwe}"/></a>
+			<input type="submit" id="login" value="提交" class="btn btn-primary" />
+			</form>
+  </div>
+        </div>
+     
+
+</body>
+</html>
