@@ -18,6 +18,8 @@ public class Topic {
 	public Long id;
 	private String name;
 	private String status;
+	private String descripsion;
+	private String commentRule;
 	@ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.LAZY)
 	private List<CommentTarget> commentTargets;
 	@ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.LAZY)
@@ -53,18 +55,33 @@ public class Topic {
 	public void setSysUsers(List<SysUser> sysUsers) {
 		this.sysUsers = sysUsers;
 	}
-	public Topic(Long id, String name, String status , List<CommentTarget> commentTargets,
-			List<SysUser> sysUsers) {
+	
+	public Topic(Long id, String name, String status, String descripsion, String commentRule,
+			List<CommentTarget> commentTargets, List<SysUser> sysUsers) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.status = status;
+		this.descripsion = descripsion;
+		this.commentRule = commentRule;
 		this.commentTargets = commentTargets;
 		this.sysUsers = sysUsers;
 	}
 	public Topic() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public String getDescripsion() {
+		return descripsion;
+	}
+	public void setDescripsion(String descripsion) {
+		this.descripsion = descripsion;
+	}
+	public String getCommentRule() {
+		return commentRule;
+	}
+	public void setCommentRule(String commentRule) {
+		this.commentRule = commentRule;
 	}
 
 	

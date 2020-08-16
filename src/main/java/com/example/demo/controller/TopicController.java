@@ -24,6 +24,12 @@ public class TopicController {
 	
 		return "comment/topic/edit";
 	}
+	@RequestMapping("/comment/topic/docomment")
+	public String docomment(Model model,Long id,String commentRule) {
+		model.addAttribute("edit",topicService.instance(id));
+	
+		return "comment/topic/docomment/"+topicService.instance(id).getCommentRule();
+	}
 
 	@RequestMapping("/comment/topic/save")
 	public String save(Model model,Topic topic) {

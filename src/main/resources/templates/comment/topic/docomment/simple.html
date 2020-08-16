@@ -1,0 +1,109 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorate="~{layout.html}">
+
+<head>
+
+<script  th:src="@{/jquery.min.js}"></script>
+<script th:inline="javascript" type="text/javascript">
+  /*<![CDATA[*/    //标识包裹的程序块为javascript
+	  $(document).ready(function(){ 
+	  var commited = false;
+	  $('#form').submit(function(){
+		  var form = new FormData($("#form")[0]);
+			 $.ajax({
+		            url: '/rest/topic/save',
+		            type: 'post',
+		            processData: false,
+		           contentType: false,
+		            data: form,
+		            success: function () {
+		                alert("已保存");
+		                commited=true;
+		            }
+		        })
+		       
+		 /// return false;
+	  })
+	   $('#commit').click(function(){
+		   var formcommit = new FormData($("#form")[0]);
+		   if(commited==true){
+			   $.ajax({
+		            url: '/rest/topic/commit',
+		            type: 'post',
+		            processData: false,
+		            contentType: false,
+		            data: formcommit,
+		            success: function () {
+		                alert("你的输入结果已被提交，你将不能再进行修改");
+$(window).attr('location','/comment/topic/index')
+
+		            }
+		        })
+
+		   }
+		   else {
+			   alert("请先保存结果")
+		   }
+		   
+	   })
+	
+    });
+
+/*]]>*/
+</script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="sidebar"><div th:replace="sidebar :: sidebar-comment"></div></div>
+<div class="main">
+		<div class="jumbotron">
+				<h2 class="text-center">编辑考评</h2>
+
+			<form id="form" th:action="@{/comment/topic/save}"  method="POST" th:object="${edit}"> <!-- 3 -->
+			<div class="form-group">
+					<input type="hidden" class="form-control" th:field="*{id}" />
+				</div>
+			
+				<div class="form-group">
+				
+					<input type="hidden" class="form-control" name="name" th:field="*{name}" />
+				</div>
+					
+					
+				<table class="table table-striped table-bordered ">
+          <thead class="thead-dark">
+        <tr>
+        <th th:text="考评对象"/>
+        <th th:text="原始分数"/>
+    
+    </tr>
+    <tbody>
+  <th:block th:each="commentTarget,i : *{commentTargets}">
+    <tr>
+        <td th:text="${commentTarget.name}"></td>
+        <td><input type="text" class="form-control" index ="${i.index}" th:field="*{commentTargets[__${i.index}__].realPoint}" /></td>
+        <td><input type="hidden" class="form-control"  index ="${i.index}"  th:field="*{commentTargets[__${i.index}__].point}" />
+        <input type="hidden"  th:field="*{commentTargets[__${i.index}__].id}" /></td>
+    </tr>
+   
+  </th:block>
+</tbody>
+	</table>
+				
+			
+			
+				<input type="submit" id="save" value="保存" class="btn btn-primary" />
+				<button type="button" id="commit" class="btn btn-primary" />提交</button>
+			</form>
+			</div>
+		
+
+      
+</div>
+</div>
+</body>
+</html>
